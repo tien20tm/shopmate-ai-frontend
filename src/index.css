@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+:root {
+  --mint: #eef8f4;
+  --card: #ffffff;
+  --text: #12352c;
+  --text-soft: #527068;
+  --line: #d3e9e0;
+  --green: #0b8a68;
+  --green-dark: #0a6e53;
+  --green-tint: #d7f3e8;
+  --alert: #ab2f24;
+
+  --status-blue: #14628f;
+  --status-blue-tint: #d9eefb;
+  --status-amber: #80590a;
+  --status-amber-tint: #fdf1cf;
+  --status-red-tint: #fbe4e1;
+
+  --background: var(--mint);
+  --foreground: var(--text);
+  --primary: var(--green);
+  --primary-foreground: #ffffff;
+  --secondary: var(--card);
+  --secondary-foreground: var(--text);
+  --accent: var(--green-tint);
+  --accent-foreground: var(--green-dark);
+  --muted: #e0f0ea;
+  --muted-foreground: var(--text-soft);
+  --destructive: var(--alert);
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--green);
+  --radius: 18px;
+}
+
+@theme inline {
+  --font-sans: "Nunito", system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--green-dark);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-line: var(--line);
+  --color-mint: var(--mint);
+  --color-soft: var(--text-soft);
+  --color-alert: var(--alert);
+  --color-alert-tint: var(--status-red-tint);
+  --color-status-blue: var(--status-blue);
+  --color-status-blue-tint: var(--status-blue-tint);
+  --color-status-amber: var(--status-amber);
+  --color-status-amber-tint: var(--status-amber-tint);
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: var(--radius);
+  --shadow-soft: 0 4px 14px rgb(11 138 104 / 0.08);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    line-height: 1.55;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Rendered Markdown from the assistant and knowledge documents. */
+  .markdown > * + * {
+    margin-top: 0.75em;
+  }
+
+  .markdown h1,
+  .markdown h2,
+  .markdown h3 {
+    font-weight: 800;
+    line-height: 1.25;
+  }
+
+  .markdown h1 {
+    font-size: 1.875rem;
+  }
+
+  .markdown h2 {
+    font-size: 1.25rem;
+    margin-top: 1.5em;
+  }
+
+  .markdown h3 {
+    font-size: 1.0625rem;
+    margin-top: 1.25em;
+  }
+
+  .markdown ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+
+  .markdown ol {
+    list-style: decimal;
+    padding-left: 1.25rem;
+  }
+
+  .markdown a {
+    color: var(--green-dark);
+    text-decoration: underline;
+  }
+
+  .markdown code {
+    background: var(--muted);
+    border-radius: 6px;
+    padding: 0 0.3em;
+  }
+
+  .markdown pre {
+    overflow-x: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
