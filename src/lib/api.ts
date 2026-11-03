@@ -82,7 +82,7 @@ async function request<T>(
   guard: Guard<T>,
   { method = "GET", body, timeoutMs = GET_TIMEOUT_MS }: RequestOptions = {},
 ): Promise<T> {
-  const baseUrl = String(import.meta.env.VITE_API_BASE_URL ?? "").replace(
+  const baseUrl = String(import.meta.env.VITE_API_BASE_URL ?? "https://shopmate-ai-backend-ky8u.onrender.com").replace(
     /\/$/,
     "",
   );
