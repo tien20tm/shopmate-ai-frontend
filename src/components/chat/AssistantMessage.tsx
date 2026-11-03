@@ -5,10 +5,16 @@ import type { ChatMessage } from "@/components/chat/ChatProvider";
 import { useDocuments } from "@/lib/queries";
 import type { ChatSource } from "@/types/api";
 
+
 const TOOL_LABELS: Record<string, string> = {
   search_knowledge_base: "Tra cứu chính sách",
   get_order_status: "Tra cứu đơn hàng",
 };
+
+function toolLabel(tool: string): string {
+  const label = TOOL_LABELS[tool];
+  return label ? `${label} (${tool})` : tool;
+}
 
 function uniqueByDocument(sources: ChatSource[]): ChatSource[] {
   const seen = new Set<string>();
@@ -62,9 +68,9 @@ export function AssistantMessage({ message }: { message: ChatMessage }) {
       </div>
       {sources.length > 0 && <SourceList sources={sources} />}
       {tools.length > 0 && (
-        <p className="mt-2 border-t pt-2 text-xs text-soft">
-          Đã thực hiện:{" "}
-          {tools.map((tool) => TOOL_LABELS[tool] ?? tool).join(", ")}
+        <p className="mt-2 border-t pt-2 text-xs break-words text-soft">
+          <span className="font-bold">Tool call đã sử dụng:</span>{" "}
+          {tools.map(toolLabel).join(", ")}
         </p>
       )}
     </article>
