@@ -150,6 +150,20 @@ describe("chat request", () => {
   });
 });
 
+describe("session start", () => {
+  it("accepts an empty 204 response and sends a checksum", async () => {
+    const fetchMock = vi.fn(async () => new Response(null, { status: 204 }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    await expect(api.startSession("/orders", "")).resolves.toBeUndefined();
+
+    const [url, init] = fetchMock.mock.calls[0] as unknown as [string, RequestInit];
+    expect(url).toContain("/api/v1/session/start");
+    expect(JSON.parse(String(init.body))).toEqual({ path: "/orders", referrer: "" });
+    expect(init.headers).toHaveProperty("X-Request-Checksum");
+  });
+});
+
 describe("format", () => {
   const order: Order = {
     id: "ORD-1",

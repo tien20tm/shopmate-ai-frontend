@@ -95,7 +95,7 @@ describe("ChatPage", () => {
       "href",
       "/knowledge/policies-cancellation_policy",
     );
-    expect(screen.getByText("Tool call của agent:").parentElement).toHaveTextContent(
+    expect(screen.getByText("Tool call đã sử dụng:").parentElement).toHaveTextContent(
       "Tra cứu đơn hàng (get_order_status), Tra cứu chính sách (search_knowledge_base)",
     );
   });
@@ -113,7 +113,7 @@ describe("ChatPage", () => {
 
     expect(await screen.findByText("Xin chào")).toBeInTheDocument();
     expect(screen.queryByText("Tài liệu tham khảo")).not.toBeInTheDocument();
-    expect(screen.queryByText(/Tool call của agent/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Tool call đã sử dụng/)).not.toBeInTheDocument();
   });
 
   it("reuses the session id, and a new conversation gets a new one", async () => {

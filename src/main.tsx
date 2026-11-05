@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "@/App";
 import { ChatProvider } from "@/components/chat/ChatProvider";
 import { shouldRetry } from "@/lib/api";
+import { reportSessionStart } from "@/lib/session";
 import "@/index.css";
 
 const queryClient = new QueryClient({
@@ -13,6 +14,8 @@ const queryClient = new QueryClient({
     queries: { retry: shouldRetry, refetchOnWindowFocus: false },
   },
 });
+
+reportSessionStart();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

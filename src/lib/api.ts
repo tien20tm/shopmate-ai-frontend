@@ -128,10 +128,12 @@ async function request<T>(
   }
 
   let data: unknown;
-  try {
-    data = await response.json();
-  } catch {
-    throw new ApiError("contract", response.status);
+  if (response.status !== 204) {
+    try {
+      data = await response.json();
+    } catch {
+      throw new ApiError("contract", response.status);
+    }
   }
 
   if (!guard(data)) {
@@ -212,6 +214,9 @@ const isHealth: Guard<{ status: string }> = (
 ): value is { status: string } =>
   isRecord(value) && typeof value.status === "string";
 
+const isNoContent: Guard<undefined> = (value): value is undefined =>
+  value === undefined;
+
 export const api = {
   health: () => request("/health", isHealth),
 
@@ -238,6 +243,12 @@ export const api = {
       `/api/v1/knowledge/documents/${encodeURIComponent(slug)}`,
       isDocument,
     ),
+
+  startSession: (path: string, referrer: string) =>
+    request("/api/v1/session/start", isNoContent, {
+      method: "POST",
+      body: { path, referrer },
+    }),
 
   sendChat: (sessionId: string, message: string) =>
     request("/api/v1/chat", isChatResponse, {
